@@ -1,0 +1,9 @@
+GuardTrellis Cursor companion
+Copyright 2026 Sahil Mathur
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+The GuardTrellis SDK is installed separately as a pinned runtime dependency
+and retains its own license and notices. This companion package reuses the
+SDK public APIs; it does not bundle SDK scanner implementations or the
+legacy integration-skill evaluation datasets.

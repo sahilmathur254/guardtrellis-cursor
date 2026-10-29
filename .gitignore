@@ -1,0 +1,22 @@
+# Local Python and build output
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Local configuration, experiment state, and reports
+.env
+.env.*
+!.env.example
+.local/
+.scratch/
+*.log
+.DS_Store

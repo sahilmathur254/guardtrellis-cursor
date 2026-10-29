@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [
+      {
+        "command": "/bin/sh ./scripts/guardtrellis.sh hook",
+        "timeout": 2,
+        "failClosed": false
+      }
+    ]
+  }
+}

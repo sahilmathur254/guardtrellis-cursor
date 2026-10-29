@@ -1,0 +1,2 @@
+# Preserve source bytes across host checkouts and deterministic release builds.
+* text=auto eol=lf

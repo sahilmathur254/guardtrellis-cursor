@@ -1,0 +1,34 @@
+name: Native Cursor offline checks
+# Manual dispatch only: public-source push and CI usage are separate owner approvals.
+# Add automatic PR/push triggers only in a separately reviewed scope.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cursor-native:
+    name: Cursor offline / macOS / Python 3.12
+    runs-on: macos-latest
+    timeout-minutes: 20
+    env:
+      UV_PYTHON_DOWNLOADS: never
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9 # v7
+        with:
+          version: '0.8.17'
+          enable-cache: false
+      - name: Native builder, runner and launcher/runtime regressions
+        run: python -I -B scripts/check_cursor_release.py --phase tests
+      - name: Locked static checks in disposable runtime
+        run: python -I -B scripts/check_cursor_release.py --phase static
+      - name: Canonical advisory export and reproducible profile artifacts
+        run: python -I -B scripts/check_cursor_release.py --phase artifacts
+      - name: Exact native and standalone helper delivery lifecycle without host execution
+        run: python -I -B scripts/check_cursor_release.py --phase lifecycle
+      - name: Check tracked source preservation
+        run: git diff --exit-code

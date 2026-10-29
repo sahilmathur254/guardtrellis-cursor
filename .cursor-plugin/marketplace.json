@@ -1,0 +1,16 @@
+{
+  "name": "guardtrellis-cursor-marketplace",
+  "owner": {
+    "name": "Sahil Mathur"
+  },
+  "metadata": {
+    "description": "Experimental local prompt checks and reviewed prefill for Cursor.",
+    "version": "0.1.0-preview.3"
+  },
+  "plugins": [
+    {
+      "name": "guardtrellis-cursor",
+      "source": "./plugins/guardtrellis-cursor"
+    }
+  ]
+}

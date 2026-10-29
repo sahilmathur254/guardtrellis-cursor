@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="GuardTrellis">
+  <rect width="256" height="256" rx="48" fill="#145C4B"/>
+  <path d="M128 38 202 67v66c0 40-32 66-74 86-42-20-74-46-74-86V67Z" fill="none" stroke="#F4F8F1" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M91 80v89m37-104v123m37-108v89M76 105h104M73 139h110M95 173h66" fill="none" stroke="#9BD0A8" stroke-width="9" stroke-linecap="round"/>
+</svg>

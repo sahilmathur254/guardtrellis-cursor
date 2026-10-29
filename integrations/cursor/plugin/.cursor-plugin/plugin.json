@@ -1,0 +1,11 @@
+{
+  "name": "guardtrellis-cursor",
+  "version": "0.1.0-preview.3",
+  "description": "Experimental local prompt checks and reviewed email/phone masking for Cursor on macOS.",
+  "author": {"name": "Sahil Mathur"},
+  "license": "Apache-2.0",
+  "keywords": ["guardtrellis", "security", "secrets", "pii", "experimental"],
+  "logo": "assets/logo.svg",
+  "commands": "commands",
+  "hooks": "hooks/hooks.json"
+}
