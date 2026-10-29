@@ -1,27 +1,83 @@
+<p align="center">
+  <img src="assets/publisher-logo.svg" alt="GuardTrellis" width="160">
+</p>
+
 # GuardTrellis for Cursor
 
-Experimental source preview. Not listed in the Cursor Marketplace; no release download is published.
+Prepare a checked draft locally, then review it in Cursor.
 
-Experimental macOS reviewed-prefill preview using the public GuardTrellis SDK **0.1.9**. Explicit Terminal preparation masks selected email and contiguous international-phone shapes and withholds recognized secret patterns or unavailable checks before opening a reviewed draft. It never presses Send; ordinary chat is not automatically rewritten. The included advisory prompt hook requests continuation and remains unverified in native submitted-prompt use; no enforcement or complete-egress claim is made.
+Built on the [GuardTrellis Python SDK](https://pypi.org/project/guardtrellis/), this companion adds selected email/phone masking, recognized-secret checks and a deliberate review workflow for Cursor.
 
-Native/helper identity **0.1.0-preview.4** adds explicit-target reviewed prefill. Its accepted runtime was verified on Cursor **3.27.22 / macOS 27.0.1 arm64, Python 3.12.0**: plugin loading preceded the actual installed shell command, native email/phone masking review, automated Escape to an empty draft, cold reopen and owned removal. This local documentation refresh corrects earlier pre-trial copy and creates new package checksums; it is not a new whole-package host trial. [Current evidence and exact runtime mapping](PUBLIC-EVIDENCE.md#accepted-preview4-runtime-and-documentation-refresh--29-october-2026) identifies the tested archives and remaining limits. Native submitted-prompt behavior, stable trust, failures/bypasses/downstream and ordinary marketplace installation remain unverified. Attachments, history, indexing, file/shell/MCP activity, inline completion and other agents are outside the prompt boundary. Native Windows/Linux and complete prompt-egress prevention are not advertised.
+[SDK on PyPI](https://pypi.org/project/guardtrellis/) · [SDK source](https://github.com/sahilmathur254/guardtrellis) · [Setup guide](integrations/cursor/delivery/README.md) · [Reviewer guide](REVIEWER.md)
 
-Terminal `prepare` still emits selected email/phone masking without opening an editor. A deliberate later `prepare --open` now requires all three target options: `--user-data-dir`, `--extensions-dir` and `--cursor-profile`. It uses the fixed installed desktop CLI, with no system-opener/default-profile fallback. Only accepted checked text is passed to the local review. The target is requested, not a guarantee of the precise workspace/window: review it and Cancel on a wrong destination. A timeout/error can occur after handoff; inspect the instance before any manual retry. See the [workflow](integrations/cursor/plugin/README.md#request-a-reviewed-draft-in-an-explicit-target).
+> **Experimental macOS preview.** The Cursor marketplace application was submitted on 30 October 2026. Approval and listing have not been verified; no release download is published. Use the reviewed source and the guides below.
 
-On macOS, choose a short canonical user-data path: IPC socket path limits can reject an otherwise valid directory before workspace loading. Directory validation alone does not guarantee that the host socket path fits.
+## What it does
 
-Use the complete matching helper bundle and an independently trusted checksum for deliberate installation into an unopened selected workspace. The native ZIP alone does not include the installer. Follow the [complete helper guide](integrations/cursor/delivery/README.md), [native compatibility](plugins/guardtrellis-cursor/COMPATIBILITY.md), [privacy](plugins/guardtrellis-cursor/PRIVACY.md) and [support](plugins/guardtrellis-cursor/SUPPORT.md). Source availability and extraction do not activate hooks. Initial explicit setup can contact package registries; prompt handling never installs a runtime.
+| Workflow | Result |
+| --- | --- |
+| Prepare text in Terminal | Checks selected secret signatures first, then masks selected email and contiguous international-phone patterns. |
+| Withhold on a secret or check failure | A recognized secret, check error or unavailable runtime prevents the prepared draft from being emitted or opened. |
+| Review in Cursor | Explicitly opens accepted text in Cursor's native review. You inspect the draft and decide whether to send. The helper never presses Send. |
+| Manage a selected workspace | Provides explicit setup, health checks and removal with ownership checks that preserve unrelated configuration. |
 
-This repository maintains the Cursor-specific templates, helpers, packaging, documentation and tests. The public SDK remains independently useful and owns scanner implementations. No hosted scanner, account system, MCP service or enterprise layer is included. Historical `adapters/codex/redact_prompt.py` and runtime-config names are retained compatibility paths for shared local preparation, not a Codex host integration.
+**Ordinary Cursor chat is not automatically redacted.** Masking uses the explicit Terminal preparation workflow. The included prompt hook is advisory: findings and unavailable checks request continuation, and its native submitted-prompt behavior remains unverified.
 
-The declared Python range is 3.11–3.14; named local/host evidence used Python 3.12. The runtime marker intentionally remains `0.1.0-preview.1-sdk0.1.9`, independently of package version. A matching tag does not authorize reuse/removal of an unknown environment. Keep retained verified tools for removal after project source deletion.
+## Masking example
 
-[Maintenance](MAINTAINING.md) describes authoritative/generated ownership and checks. A source repository, downloadable release and marketplace listing are separate milestones. Any later download needs an approved immutable identity and trusted checksum; no marketplace approval or universal installation route is claimed.
+```text
+Before: Repeat after me: Mira mira@example.org +12025550123.
+After:  Repeat after me: Mira [PII] [PII].
+```
 
-Support is voluntary and manually reviewed metadata-only, without automatic collection/export or SLA. Do not send raw prompts, source, matched values, credentials or host logs. Host/provider handling remains separate. [License](LICENSE) · [Notices](NOTICE).
+The name remains. Unsupported formats and other personal information can remain too; selected patterns do not provide complete PII or secret detection.
 
-## Publisher and review
+## Get started
 
-Publisher: **GuardTrellis**, maintained by **Sahil Mathur** as an individual. Preferred publisher handle `@guardtrellis` is not reserved or availability-tested. Monitored public support/security contact: [sahil.mathur2504@gmail.com](mailto:sahil.mathur2504@gmail.com); manual handling, no response-time SLA or enterprise offer. See the [reviewer guide](REVIEWER.md) for the tested local workflow and a synthetic review/Cancel checklist.
+Use an existing trusted **Python 3.12** and **uv 0.8.17** for the documented setup. The declared Python range is 3.11–3.14; the named host tests used Python 3.12.
 
-The [publisher artwork](assets/publisher-logo.svg) uses the owner-supplied shield/checkmark image unchanged on a square white SVG background plate; it is separate from the frozen native plugin icon. The image file is local source until an approved public push; no form URL, namespace reservation, marketplace application or vendor approval is implied. Existing older website/tester downloads keep their own version scope.
+1. Read the [compatibility](plugins/guardtrellis-cursor/COMPATIBILITY.md), [privacy](plugins/guardtrellis-cursor/PRIVACY.md) and [support](plugins/guardtrellis-cursor/SUPPORT.md) documents.
+2. [Build the matching archives from reviewed source](REVIEWER.md#1-establish-exact-source-and-artifacts), then follow the [complete helper setup guide](integrations/cursor/delivery/README.md). It covers trusted checksums, an external SDK runtime, workspace staging, health checks and removal. The native ZIP alone does not contain the workspace installer.
+3. Test preparation locally in **Terminal**, using the paths configured by that guide:
+
+```sh
+GUARDTRELLIS_CURSOR_RUNTIME="$GT_CURSOR_RUNTIME" \
+  /bin/sh "$GT_NATIVE_TOOLS/scripts/guardtrellis.sh" prepare <<'GT_SYNTHETIC'
+Repeat after me: Mira mira@example.org +12025550123.
+GT_SYNTHETIC
+```
+
+Expected stdout: `Repeat after me: Mira [PII] [PII].` Fixed diagnostic metadata goes to stderr. Keep raw input on stdin; do not paste the shell command or private input into Agent Chat.
+
+To open a reviewed draft, follow the [explicit Cursor prefill workflow](integrations/cursor/plugin/README.md#request-a-reviewed-draft-in-an-explicit-target). `prepare --open` requires all three target options: `--user-data-dir`, `--extensions-dir` and `--cursor-profile`. Inspect the actual window, workspace and attached context; Cancel if the destination is wrong. A timeout/error can follow a handoff, so inspect before retrying. There is no automatic retry or default-profile fallback.
+
+Source extraction and runtime setup do not activate hooks. Opening an approved staged workspace can activate its lifecycle hook. Initial setup may download locked packages from registries; prompt handling never installs a runtime. On macOS, use a short user-data path to avoid host IPC socket limits.
+
+## Verified scope
+
+| Item | Recorded version |
+| --- | --- |
+| Native plugin and helper | `0.1.0-preview.4` |
+| GuardTrellis SDK pin | `0.1.9` |
+| Named Cursor build | `3.27.22` |
+| Named host environment | macOS `27.0.1`, arm64, Python `3.12.0` |
+
+The accepted runtime was observed loading in Cursor, opening the masked review through the actual installed command, cancelling to an empty draft, reopening and being removed. Refreshed archives retain that runtime but have not undergone a new whole-package host trial. See the [exact hashes, runtime mapping and evidence limits](PUBLIC-EVIDENCE.md#accepted-preview4-runtime-and-documentation-refresh--29-october-2026).
+
+[Manual CI at `1ebfd6a`](https://github.com/sahilmathur254/guardtrellis-cursor/actions/runs/40936455108) passed **146 tests, zero skips and all four phases**, including the SDK/helper lifecycle. CI process checks and actual IDE behavior are separate evidence.
+
+This preview does not establish native prompt enforcement, stable host trust/failure/bypass behavior, downstream request blocking or complete prompt-egress prevention. Attachments, conversation history, indexing, file/shell/MCP activity, inline completion and other agents are outside coverage. Native Windows/Linux support is not advertised.
+
+## How this relates to the SDK
+
+The [GuardTrellis SDK on PyPI](https://pypi.org/project/guardtrellis/) provides the reusable checking engine and works independently of Cursor. This repository adds host adapters, reviewed prefill, installation helpers, packaging and host verification; it reuses SDK public APIs rather than copying scanner implementations.
+
+SDK and companion versions are independent. This preview pins SDK **0.1.9**; installing the SDK alone does not install the Cursor integration. No hosted scanner, account system, MCP service or enterprise management layer is included. Historical `adapters/codex/` paths are shared-runtime compatibility names, not a Codex host integration.
+
+## Support and contributing
+
+Maintained by **Sahil Mathur** as an individual publisher. Public support/security contact: [sahil.mathur2504@gmail.com](mailto:sahil.mathur2504@gmail.com). Support is manual, with no response-time SLA or automatic collection/upload.
+
+Share reviewed version/status metadata and fictional reproductions only. Do not send raw prompts, source, matched values, credentials or host logs. Local preparation does not change Cursor/provider retention or network behavior. Older website/tester downloads retain their own version scope.
+
+[Support and removal](plugins/guardtrellis-cursor/SUPPORT.md) · [Privacy](plugins/guardtrellis-cursor/PRIVACY.md) · [Maintenance and contribution workflow](MAINTAINING.md) · [License](LICENSE) · [Notices](NOTICE)
