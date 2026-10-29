@@ -1,8 +1,8 @@
 # GuardTrellis for Cursor — experimental native source
 
-**0.1.0-preview.3 · SDK 0.1.9 · advisory by default.** This is a local candidate, not a marketplace listing or a new public download. It contains selected-secret prompt-check code, explicit local runtime tools and Terminal email/phone preparation. It needs no GuardTrellis account, API key, MCP server or hosted scanner.
+**0.1.0-preview.4 · SDK 0.1.9 · advisory by default.** This is a local candidate, not a marketplace listing or a new public download. It contains selected-secret prompt-check code, explicit local runtime tools and Terminal email/phone preparation. It needs no GuardTrellis account, API key, MCP server or hosted scanner.
 
-**Preview.3 has not been tested in a real Cursor host.** This new local candidate corrects native-only notices and public copy; it changes package hashes while retaining the SDK, policy, helper/bootstrap and runtime/hook implementations. Earlier exact preview.2 loading/restart/removal and local SDK readiness/runtime binding were observed on Cursor 3.27.22/macOS arm64. Component UI and explicit-profile masked review → Cancel were separately observed in a named profile sharing application/account state. These are bounded preview.2 observations, not whole-package preview.3 acceptance. Native prompt-hook SDK consumption/decisions, stable trust, failures/bypasses, default opener, downstream requests and ordinary marketplace installation remain unverified.
+**The accepted runtime has bounded native evidence.** Advisory preview.4 SHA `a655171ed0ef3416baa0553d6afac9fd0f3954c1cfdfdea4f0b5502a800ad45f` was observed on Cursor **3.27.22 / macOS 27.0.1 arm64, Python 3.12.0**: native plugin loading first, actual installed shell/full-target prefill, masked email/phone review, automated Escape/empty input, cold reopen **1 loaded / 0 retained / 0 failures** and fresh post-removal **0 loaded / 0 retained / 0 failures**. No callback override, Create Chat, Send or provider/model workflow was used. This documentation-only refresh corrects the pre-trial status and creates new checksums; its new ZIP is not itself whole-package host-tested. Behavior evidence maps to unchanged executable/configuration/runtime inputs from the accepted archive. Prior preview.3 callback-based masked review/owner-assisted Cancel and earlier preview.2 evidence remain historical. Native prompt-hook SDK consumption/decisions, stable trust, failures/bypasses, downstream requests and ordinary marketplace installation remain unverified.
 
 ## Behavior and coverage
 
@@ -18,7 +18,7 @@ GuardTrellis diagnostics omit input/match values. Preparation intentionally emit
 
 | Item | Identity and limit |
 | --- | --- |
-| Native source / complete helper delivery | 0.1.0-preview.3; separate source artifacts |
+| Native source / complete helper delivery | 0.1.0-preview.4; separate source artifacts |
 | SDK | Locked GuardTrellis 0.1.9; scanner implementations are reused through public SDK APIs |
 | Existing runtime marker/default identity | `0.1.0-preview.1-sdk0.1.9`, intentionally retained |
 | Declared Python range | 3.11–3.14; prior named local/host evidence used Python 3.12.0 |
@@ -37,7 +37,7 @@ GT_PY="/absolute/trusted/python3.12"
 GT_UV="/absolute/trusted/uv"
 GT_HELPER_ROOT="/absolute/verified-helper-bundle"
 GT_WORKSPACE="/absolute/approved workspace with spaces"
-GT_NATIVE_ZIP="$GT_HELPER_ROOT/artifacts/guardtrellis-cursor-0.1.0-preview.3-advisory.zip"
+GT_NATIVE_ZIP="$GT_HELPER_ROOT/artifacts/guardtrellis-cursor-0.1.0-preview.4-advisory.zip"
 GT_NATIVE_SHA="REPLACE_WITH_TRUSTED_NATIVE_SHA256"
 GT_NATIVE_TOOLS="/absolute/new-retained-native-tools"
 GT_RUNTIME="/absolute/new-external-sdk019-runtime"
@@ -93,7 +93,28 @@ GT_SYNTHETIC
 
 Expected checked text is `Repeat after me: Mira [PII] [PII].` The name remains. Metadata goes to stderr. Never put private text into chat, a slash command, an argument or an attachment to invoke masking.
 
-Only a separate deliberate `prepare --open` requests Cursor's reviewed-prefill flow. It launches the editor and passes accepted text through OS/Cursor handling; it does not press Send. Start with an empty draft in the intended workspace/This Mac, inspect the text and attached context, and Cancel on a wrong destination or valuable existing draft. Review/Create Chat is not Send. This workflow does not sanitize attachments/history or prove provider-request suppression. The earlier preview.2 test used an explicit-profile CLI launcher callback and Cancel; it did not test the bundled default `/usr/bin/open -a` opener. No preview.3 native prefill acceptance or provider-suppression result is claimed.
+## Request a reviewed draft in an explicit target
+
+This separate editor action requires activation approval for the selected instance. Use an already-open approved Cursor instance/workspace with an empty draft and the selected existing canonical user-data/extensions directories. Those directories must be distinct, nonoverlapping and outside normal IDE roots. A named profile alone does not isolate user-data. Do not create or switch a normal profile as a shortcut.
+
+```sh
+GT_CURSOR_USER_DATA="/absolute/approved-existing-cursor-user-data"
+GT_CURSOR_EXTENSIONS="/absolute/approved-existing-cursor-extensions"
+GT_CURSOR_PROFILE="GuardTrellis-Isolated"
+GUARDTRELLIS_CURSOR_RUNTIME="$GT_RUNTIME" \
+  /bin/sh "$GT_NATIVE_TOOLS/scripts/guardtrellis.sh" prepare --open \
+  --user-data-dir "$GT_CURSOR_USER_DATA" \
+  --extensions-dir "$GT_CURSOR_EXTENSIONS" \
+  --cursor-profile "$GT_CURSOR_PROFILE" <<'GT_SYNTHETIC'
+Repeat after me: Mira mira@example.org +12025550123.
+GT_SYNTHETIC
+```
+
+On macOS, choose a short canonical user-data path: IPC socket path limits can reject an otherwise valid directory before workspace loading. Directory validation alone does not guarantee that the host socket path fits.
+
+The complete target is mandatory; bare `prepare --open` and partial/unknown options are refused. Accepted checked text alone is passed to the fixed `/Applications/Cursor.app/Contents/Resources/app/bin/cursor` desktop CLI, with a minimal local environment. There is no OS-opener/default-profile fallback or automatic retry. The tool does not press Send. Cursor may launch if the selected instance is closed; this is not a no-activation check.
+
+[Cursor's prompt deeplink](https://cursor.com/docs/reference/deeplinks) opens a review and has a 10,000-character encoded-URL limit. The shipped Cursor 3.27.22 CLI recognizes `--open-url`; support across other builds is not guaranteed. Explicit directories/profile request the target, not the precise workspace/window. Inspect masked text, destination and attached context, and Cancel on wrong routing or a valuable draft. Review/Create Chat is not Send. This does not sanitize attachments/history or prove provider suppression. An error/timeout can happen after a handoff; inspect the instance before a deliberate manual retry. The accepted runtime’s actual product path was observed through review/automated Escape in the named isolated host; this does not establish submitted-prompt behavior or certify a changed executable.
 
 ## Safe removal, updates and rollback
 

@@ -4,7 +4,6 @@ set -u
 
 gt_cursor_mode=${1-}
 gt_cursor_profile=advisory
-gt_cursor_open=false
 
 gt_cursor_unavailable() {
     gt_cursor_reason=$1
@@ -36,9 +35,13 @@ case "$gt_cursor_mode" in
         fi
         ;;
     prepare)
-        if [ "$#" -eq 1 ] && [ "$1" = --open ]; then
-            gt_cursor_open=true
-        elif [ "$#" -ne 0 ]; then
+        if [ "$#" -eq 0 ]; then
+            :
+        elif [ "$#" -eq 7 ] && [ "$1" = --open ] &&
+             [ "$2" = --user-data-dir ] && [ "$4" = --extensions-dir ] &&
+             [ "$6" = --cursor-profile ]; then
+            :
+        else
             gt_cursor_unavailable invalid_configuration
         fi
         ;;
@@ -101,7 +104,4 @@ gt_cursor_script="$gt_cursor_root/adapters/cursor/prepare_prompt.py"
 if [ ! -f "$gt_cursor_script" ] || [ -L "$gt_cursor_script" ]; then
     gt_cursor_unavailable runtime_unavailable
 fi
-if [ "$gt_cursor_open" = true ]; then
-    exec "$gt_cursor_python" -I -B "$gt_cursor_script" --open
-fi
-exec "$gt_cursor_python" -I -B "$gt_cursor_script"
+exec "$gt_cursor_python" -I -B "$gt_cursor_script" "$@"

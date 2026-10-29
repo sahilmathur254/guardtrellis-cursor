@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import os
+import re
 import subprocess
 import sys
 import unicodedata
@@ -68,16 +70,117 @@ def _report(reason: str, *, status: str = "unavailable") -> dict[str, object]:
     }
 
 
-def _launch(uri: str) -> bool:
+CURSOR_CLI = "/Applications/Cursor.app/Contents/Resources/app/bin/cursor"
+LAUNCH_ENV_KEYS = (
+    "HOME",
+    "USER",
+    "LOGNAME",
+    "LANG",
+    "LC_ALL",
+    "TMPDIR",
+    "GUARDTRELLIS_CURSOR_RUNTIME",
+)
+
+
+@dataclass(frozen=True)
+class LaunchTarget:
+    user_data_dir: Path = field(repr=False)
+    extensions_dir: Path = field(repr=False)
+    profile: str = field(repr=False)
+
+
+def _overlaps(first: Path, second: Path) -> bool:
+    # samefile also detects case aliases on a case-insensitive volume. Known
+    # protected roots can be absent; lexical protection still applies to them.
+    if first.is_relative_to(second) or second.is_relative_to(first):
+        return True
+    for parent, child in ((first, second), (second, first)):
+        for ancestor in (child, *child.parents):
+            try:
+                if ancestor.samefile(parent):
+                    return True
+            except FileNotFoundError:
+                continue
+    return False
+
+
+def launch_target(user_data_dir: str, extensions_dir: str, profile: str) -> LaunchTarget:
+    """Validate explicit existing storage; never create or edit a host/profile."""
+    home = Path.home().resolve()
+    protected = [
+        home / ".cursor",
+        home / ".codex",
+        home / ".claude",
+        home / "Library/Application Support/Cursor",
+        home / "Library/Application Support/Code",
+        Path("/Library/Application Support/Cursor"),
+        Path("/Applications/Cursor.app"),
+    ]
+    directories = []
+    for value in (user_data_dir, extensions_dir):
+        if len(value) > 4096 or any(ord(char) < 32 or ord(char) == 127 for char in value):
+            raise ValueError
+        path = Path(value)
+        if not path.is_absolute() or path.resolve(strict=True) != path or not path.is_dir():
+            raise ValueError
+        if any(_overlaps(path, root) for root in protected):
+            raise ValueError
+        directories.append(path)
+    data, extensions = directories
+    if _overlaps(data, extensions):
+        raise ValueError
+    if (
+        re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9 ._-]{0,79}", profile) is None
+        or profile != profile.strip()
+    ):
+        raise ValueError
+    return LaunchTarget(data, extensions, profile)
+
+
+def _launch(uri: str, target: LaunchTarget) -> bool:
+    # Revalidate at dispatch. This is not a sandbox or a filesystem-race guarantee.
+    target = launch_target(str(target.user_data_dir), str(target.extensions_dir), target.profile)
+    env = {key: os.environ[key] for key in LAUNCH_ENV_KEYS if key in os.environ}
+    env["PATH"] = "/usr/bin:/bin:/usr/sbin:/sbin"
     completed = subprocess.run(
-        ["/usr/bin/open", "-a", "/Applications/Cursor.app", uri],
+        [
+            CURSOR_CLI,
+            "--user-data-dir",
+            str(target.user_data_dir),
+            "--extensions-dir",
+            str(target.extensions_dir),
+            "--profile",
+            target.profile,
+            "--open-url",
+            uri,
+        ],
         stdin=subprocess.DEVNULL,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
+        env=env,
+        cwd=str(target.user_data_dir),
         check=False,
         timeout=LAUNCH_TIMEOUT_SECONDS,
     )
     return completed.returncode == 0
+
+
+def _options(options: list[str]) -> tuple[bool, LaunchTarget | None]:
+    if not options:
+        return False, None
+    if len(options) != 7 or options[0] != "--open":
+        raise ValueError
+    values = {}
+    allowed = {"--user-data-dir", "--extensions-dir", "--cursor-profile"}
+    for key, value in zip(options[1::2], options[2::2], strict=True):
+        if key not in allowed or key in values:
+            raise ValueError
+        values[key] = value
+    if set(values) != allowed:
+        raise ValueError
+    return True, launch_target(
+        values["--user-data-dir"], values["--extensions-dir"], values["--cursor-profile"]
+    )
 
 
 def prepare_prompt(
@@ -86,6 +189,7 @@ def prepare_prompt(
     open_cursor: bool = False,
     platform: str | None = None,
     launcher: Callable[[str], bool] | None = None,
+    target: LaunchTarget | None = None,
 ) -> Prepared:
     """Withhold secrets/errors; open mode passes only accepted text to the launcher."""
     report = _report("scan_failed")
@@ -147,7 +251,14 @@ def prepare_prompt(
         report["reason_code"] = "uri_too_large"
         return Prepared(None, report, 1)
     try:
-        if (launcher or _launch)(uri) is not True:
+        if launcher is not None:
+            launched = launcher(uri)
+        elif target is not None:
+            launched = _launch(uri, target)
+        else:
+            report["reason_code"] = "invalid_configuration"
+            return Prepared(None, report, 1)
+        if launched is not True:
             raise OSError
     except Exception:
         report["reason_code"] = "launch_failed"
@@ -187,7 +298,9 @@ def _emit(prepared: Prepared) -> int:
 
 def main(argv: Sequence[str] | None = None) -> int:
     options = list(sys.argv[1:] if argv is None else argv)
-    if options not in ([], ["--open"]):
+    try:
+        open_cursor, target = _options(options)
+    except Exception:
         return _emit(Prepared(None, _report("invalid_configuration"), 1))
     # Check diagnostic availability before requesting an external application action.
     if sys.stderr is None or sys.stdout is None:
@@ -201,7 +314,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             raise OSError
     except Exception:
         return _emit(Prepared(None, _report("stream_unavailable"), 1))
-    return _emit(prepare_prompt(raw, open_cursor=options == ["--open"]))
+    return _emit(prepare_prompt(raw, open_cursor=open_cursor, target=target))
 
 
 if __name__ == "__main__":

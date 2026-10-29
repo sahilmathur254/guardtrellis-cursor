@@ -23,10 +23,10 @@ native = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(native)
 
 NAME = "guardtrellis-cursor-helper"
-VERSION = "0.1.0-preview.3"
+VERSION = "0.1.0-preview.4"
 MANIFEST = "DELIVERY-MANIFEST.json"
-NATIVE_PATH = "artifacts/guardtrellis-cursor-0.1.0-preview.3-advisory.zip"
-NATIVE_SHA256 = "0ad5fba2da3f2762fe7f8f3c4bb1ae60a6a795966f08f7fd98c8c8afe442a27f"
+NATIVE_PATH = "artifacts/guardtrellis-cursor-0.1.0-preview.4-advisory.zip"
+NATIVE_SHA256 = "092f10ac145838ffc25f11396b129b808bc5ed1f782cd9cb89da3c04758ae064"
 MAX_BYTES = 32 * 1024 * 1024
 MAX_TEXT_BYTES = 512 * 1024
 SOURCE_FILES = {

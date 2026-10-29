@@ -20,7 +20,7 @@ class TemplateTests(unittest.TestCase):
     def test_native_manifest_has_no_mcp_or_automatic_setup(self) -> None:
         manifest = json.loads((SOURCE / ".cursor-plugin/plugin.json").read_text())
         self.assertEqual(manifest["name"], "guardtrellis-cursor")
-        self.assertEqual(manifest["version"], "0.1.0-preview.3")
+        self.assertEqual(manifest["version"], "0.1.0-preview.4")
         self.assertEqual(manifest["hooks"], "hooks/hooks.json")
         self.assertEqual(manifest["commands"], "commands")
         self.assertNotIn("mcpServers", manifest)
@@ -181,9 +181,18 @@ class LauncherTests(unittest.TestCase):
 
     def test_prepare_open_is_only_an_explicit_forwarded_option(self) -> None:
         self.env["GT_CURSOR_TEST_OUTPUT"] = ""
-        result = self.run_launcher("prepare", "--open", raw=b"Synthetic fixture")
+        options = [
+            "--open",
+            "--user-data-dir",
+            str(self.root / "data with spaces"),
+            "--extensions-dir",
+            str(self.root / "extensions"),
+            "--cursor-profile",
+            "GT Test",
+        ]
+        result = self.run_launcher("prepare", *options, raw=b"Synthetic fixture")
         self.assertEqual(result.stdout, b"")
-        self.assertEqual((self.root / "arguments.txt").read_text().splitlines()[-1], "--open")
+        self.assertEqual((self.root / "arguments.txt").read_text().splitlines()[-7:], options)
 
     def test_missing_marker_advisory_stays_unavailable_and_continues(self) -> None:
         self.marker.unlink()
@@ -197,7 +206,7 @@ class LauncherTests(unittest.TestCase):
 
     def test_missing_marker_prepare_withholds_everything(self) -> None:
         self.marker.unlink()
-        self.assert_unavailable(self.run_launcher("prepare", "--open"), prepare=True)
+        self.assert_unavailable(self.run_launcher("prepare"), prepare=True)
 
     def test_wrong_marker_is_rejected(self) -> None:
         self.marker.write_text("0.1.0-preview.1-sdk0.1.6\n")
@@ -278,7 +287,7 @@ class LauncherTests(unittest.TestCase):
 
     def test_missing_prepare_adapter_never_opens_or_emits_raw_text(self) -> None:
         (self.plugin / "adapters/cursor/prepare_prompt.py").unlink()
-        self.assert_unavailable(self.run_launcher("prepare", "--open"), prepare=True)
+        self.assert_unavailable(self.run_launcher("prepare"), prepare=True)
 
     def test_unknown_profile_cannot_silently_weaken_enforcement(self) -> None:
         self.assert_unavailable(

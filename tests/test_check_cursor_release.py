@@ -619,6 +619,8 @@ class NativeRunnerTests(unittest.TestCase):
             )
         delivery.build.assert_not_called()
         self.assertIn("scripts/cursor_delivery.py", runner.TOOL_FILES)
+        self.assertIn("plugins/guardtrellis/adapters/cursor/prepare_prompt.py", runner.TOOL_FILES)
+        self.assertIn("integrations/cursor/tests/test_prefill.py", runner.TEST_FILES)
         self.assertIn("tests/test_cursor_delivery.py", runner.TEST_FILES)
 
 

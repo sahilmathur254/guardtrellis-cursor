@@ -135,50 +135,72 @@ class PublicCopyTests(unittest.TestCase):
         self.assertFalse(script.startswith(workspace + "/"))
         self.assertNotIn(".guardtrellis-cursor/", script)
 
-    def test_public_claims_keep_documentation_candidate_separate_from_host_acceptance(self):
+    def test_public_claims_preserve_current_identity_and_boundary_limits(self):
         for relative in (
             "integrations/cursor/plugin/README.md",
             "integrations/cursor/delivery/README.md",
         ):
-            text = re.sub(r"\s+", " ", (ROOT / relative).read_text().lower())
-            text = text.replace("**", "")
+            text = (ROOT / relative).read_text().lower()
             with self.subTest(relative=relative):
                 self.assertIn(native.VERSION.lower(), text)
-                self.assertRegex(
-                    text,
-                    r"preview\.3.{0,180}(?:not.{0,50}(?:host|cursor)|unverified|untested)",
-                )
-                self.assertRegex(text, r"preview\.2.{0,350}(?:loading|open|restart|removal)")
+                # These are disclosure/claim invariants, not proof of host behavior.
+                self.assertIn("accepted runtime", text)
+                self.assertIn("documentation-only", text)
+                self.assertRegex(text, r"new (?:package )?checksums")
+                self.assertRegex(text, r"not (?:itself|themselves) whole-package host-tested")
+                self.assertRegex(text, r"automated escape.{0,30}empty")
                 for term in ("trust", "failure", "bypass", "downstream", "unverified"):
                     self.assertIn(term, text)
-                self.assertRegex(
-                    text,
-                    r"(?:cancel|unsent).{0,250}(?:observed|preview\.2)|"
-                    r"preview\.2.{0,450}(?:cancel|unsent)",
-                )
+                for term in ("preview.3", "cancel", "owner-assisted", "prior"):
+                    self.assertIn(term, text)
                 self.assertIn("0.1.0-preview.1-sdk0.1.9", text)
-                self.assertRegex(text, r"(?:prompt )?hook.{0,80}(?:does not|cannot).{0,50}rewrite")
+                self.assertRegex(text, r"prompt hook does not rewrite prompts")
                 self.assertIn("advisory", text)
-                self.assertTrue(
-                    all(
-                        term in text
-                        for term in ("attachments", "history", "mcp", "inline", "other agents")
-                    )
-                )
+                for term in ("attachments", "history", "mcp", "inline", "other agents"):
+                    self.assertIn(term, text)
         privacy = (ROOT / "integrations/cursor/plugin/PRIVACY.md").read_text()
-        self.assertRegex(privacy, r"prompt adapter.{0,160}checks only its submitted prompt")
+        self.assertIn("checks only its submitted prompt", privacy)
         self.assertIn("workspaceOpen", privacy)
         for relative in (
             "integrations/cursor/plugin/SUPPORT.md",
             "integrations/cursor/delivery/SUPPORT.md",
         ):
-            text = re.sub(r"\s+", " ", (ROOT / relative).read_text().lower())
-            text = text.replace("**", "")
+            text = (ROOT / relative).read_text().lower()
             with self.subTest(relative=relative):
                 self.assertRegex(text, r"metadata[- ]only|reviewed metadata template")
-                self.assertRegex(
-                    text, r"(?:do not|omit|never).{0,180}raw.{0,80}(?:prompt|source|input)"
+                self.assertIn("raw prompts", text)
+
+    def test_prefill_guides_show_complete_explicit_target_without_executing_it(self):
+        required = {"--user-data-dir", "--extensions-dir", "--cursor-profile"}
+        for relative in (
+            "integrations/cursor/plugin/README.md",
+            "integrations/cursor/delivery/README.md",
+            "integrations/cursor/plugin/commands/guardtrellis-prepare.md",
+        ):
+            text = (ROOT / relative).read_text()
+            invocations = []
+            for block in re.findall(r"```sh\n(.*?)```", text, re.S):
+                for line in block.replace("\\\n", " ").splitlines():
+                    tokens = shlex.split(line, comments=True)
+                    for index, token in enumerate(tokens):
+                        if token.endswith("/guardtrellis.sh"):
+                            invocations.append(tokens[index + 1 :])
+            with self.subTest(relative=relative):
+                self.assertTrue(
+                    any(
+                        args and args[0] == "prepare" and "--open" not in args
+                        for args in invocations
+                    )
                 )
+                opened = [args for args in invocations if "--open" in args]
+                self.assertEqual(len(opened), 1)
+                self.assertTrue(required <= set(opened[0]))
+                for flag in required:
+                    self.assertLess(opened[0].index(flag) + 1, len(opened[0]))
+                lower = text.lower()
+                for term in ("no", "fallback", "retry", "handoff", "cancel", "workspace/window"):
+                    self.assertIn(term, lower)
+                self.assertIn("https://cursor.com/docs/reference/deeplinks", text)
 
     def test_ci_requires_deliberate_dispatch_and_keeps_bounded_offline_checks(self):
         text = (ROOT / ".github/workflows/cursor-native.yml").read_text()

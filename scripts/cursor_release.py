@@ -16,7 +16,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 NAME = "guardtrellis-cursor"
-VERSION = "0.1.0-preview.3"
+VERSION = "0.1.0-preview.4"
 MANIFEST = "SOURCE-MANIFEST.json"
 MAX_BYTES = 16 * 1024 * 1024
 PROFILES = ("advisory", "enforce-secrets-v1")

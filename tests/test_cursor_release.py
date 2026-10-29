@@ -107,7 +107,7 @@ class NativeReleaseTests(unittest.TestCase):
     def test_new_source_identity_keeps_existing_runtime_identity(self):
         archive, checksum = self.build()
         files = release.verify(archive, checksum)
-        self.assertEqual(release.VERSION, "0.1.0-preview.3")
+        self.assertEqual(release.VERSION, "0.1.0-preview.4")
         self.assertEqual(len(files), 23)
         self.assertEqual(
             json.loads(files[".cursor-plugin/plugin.json"])["version"], release.VERSION

@@ -1,24 +1,26 @@
 # Support for the experimental Cursor helper bundle
 
-Publisher: Sahil Mathur. Support is voluntary, with no response-time commitment, SLA or enterprise-management offer. This outer 0.1.0-preview.3 helper bundle is distinct from the inner 23-member native plugin ZIP and older tester download. Keep its authenticated ZIP/checksum and matching tools for reproduction and recovery.
+Publisher: Sahil Mathur. Support is voluntary, with no response-time commitment, SLA or enterprise-management offer. This outer 0.1.0-preview.4 helper bundle is distinct from the inner 23-member native plugin ZIP and older tester download. Keep its authenticated ZIP/checksum and matching tools for reproduction and recovery.
 
-Private support/security/privacy contact: [sahil.mathur2504@gmail.com](mailto:sahil.mathur2504@gmail.com), published on the [support page](https://guardtrellis-plugin.sahil254.chatgpt.site/support/). That page was anonymously reachable on 29 October 2026; mailbox delivery/response and future availability are not promised. The public [privacy page](https://guardtrellis-plugin.sahil254.chatgpt.site/privacy/) still describes the older integration/site/email offering; the native-specific `PRIVACY.md` inside this bundle's included native ZIP and retained verified native-tools describes the preview.3 helper. Do not assume a public GitHub issue/advisory route exists or post private vulnerability details there. The tools do not open tickets, send email or upload diagnostics automatically.
+Private support/security/privacy contact: [sahil.mathur2504@gmail.com](mailto:sahil.mathur2504@gmail.com), published on the [support page](https://guardtrellis-plugin.sahil254.chatgpt.site/support/). That page was anonymously reachable on 29 October 2026; mailbox delivery/response and future availability are not promised. The public [privacy page](https://guardtrellis-plugin.sahil254.chatgpt.site/privacy/) still describes the older integration/site/email offering; the native-specific `PRIVACY.md` inside this bundle's included native ZIP and retained verified native-tools describes the preview.4 helper. Do not assume a public GitHub issue/advisory route exists or post private vulnerability details there. The tools do not open tickets, send email or upload diagnostics automatically.
 
 ## Evidence-bounded support matrix
 
 | Area | Current evidence / limit |
 | --- | --- |
-| Host target | Preview.3 has not been tested in a real Cursor host. Exact preview.2 helper/bootstrap loading/restart/removal was observed on Cursor 3.27.22/macOS arm64; bounded prior evidence only |
-| Runtime target | SDK 0.1.9; prior named Python 3.12.0 / uv 0.8.17. Runtime identity `0.1.0-preview.1-sdk0.1.9` intentionally remains independent of native/delivery 0.1.0-preview.3; no automatic reuse/migration |
+| Host target | Accepted preview.4 runtime: native loading first, actual shell/full-target masked review, automated Escape/empty input, cold reopen 1/0/0 and fresh removal 0/0/0 on Cursor 3.27.22/macOS 27.0.1 arm64/Python 3.12.0; no Create Chat/Send/provider workflow. New documentation-only hashes are not themselves whole-package host-tested; unchanged executable/configuration mapping required |
+| Runtime target | SDK 0.1.9; prior named Python 3.12.0 / uv 0.8.17. Runtime identity `0.1.0-preview.1-sdk0.1.9` intentionally remains independent of native/delivery 0.1.0-preview.4; no automatic reuse/migration |
 | Delivery scope | Standalone allowlisted helper + builder + bootstrap + verified advisory native ZIP; no public release, marketplace or normal-profile acceptance implied |
 | Policy | Advisory only; findings/unavailable checks request continuation. No enforcing profile is installed by this bundle |
 | Prompt coverage | Selected secret signatures in submitted prompt only; actual native prompt-hook execution/decisions remain unverified for this candidate |
 | PII masking | Explicit local Terminal email/contiguous-phone preparation; reviewed prefill is separate. Ordinary chat is not automatically masked |
 | Not covered | Attachments/history/indexing/file reads/shell or MCP interception/inline completion/other agents; native Windows/Linux; complete egress suppression |
-| Prior preview.2 UI/runtime | Local SDK readiness/main-process runtime binding, four-command/one-hook UI and explicit-profile masked review → Cancel observed; the UI profile shared application/account state |
-| Still separate | Stable trust/disabled/failure/bypass behavior, native prompt-hook SDK consumption, default opener/downstream observation, ordinary marketplace installation and publication |
+| Prior preview.2 | Historical lifecycle/UI/runtime/review observations; not changed-package acceptance |
+| Still separate | Stable trust/disabled/failure/bypass behavior, native prompt-hook SDK consumption, downstream observation, ordinary marketplace installation and publication |
 
 A scanner finding, a requested host cancellation and an observed blocked downstream request must be reported separately. Never test support claims with real credentials, personal data or confidential code. A free/trial account is not proof that a submission is nonbillable; support reproduction does not authorize provider usage.
+
+Reviewed prefill now requires `--open --user-data-dir ABS --extensions-dir ABS --cursor-profile NAME`, with existing canonical distinct nonoverlapping directories outside normal IDE roots. Bare/partial options and unsafe paths are refused. Fixed installed desktop CLI/minimal environment replaces the unscoped OS opener; no default-profile fallback or automatic retry. Shipped Cursor 3.27.22 --open-url support is named-build compatibility, not a version or precise workspace/window guarantee. Check the already-open empty intended workspace, review and Cancel on wrong routing. Error/timeout can follow handoff; inspect before a manual retry. No Send/provider test follows from a support request.
 
 ## First checks in Terminal
 

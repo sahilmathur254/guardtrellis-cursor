@@ -76,12 +76,12 @@ class DeliveryTests(unittest.TestCase):
         archive, checksum = self.build()
         files = delivery.verify(archive, checksum)
         record = json.loads(files[delivery.MANIFEST])
-        self.assertEqual(record["version"], "0.1.0-preview.3")
-        self.assertEqual(record["native"]["version"], "0.1.0-preview.3")
+        self.assertEqual(record["version"], "0.1.0-preview.4")
+        self.assertEqual(record["native"]["version"], "0.1.0-preview.4")
         self.assertEqual(record["native"]["sdk_version"], "0.1.9")
         self.assertEqual(
             record["native"]["path"],
-            "artifacts/guardtrellis-cursor-0.1.0-preview.3-advisory.zip",
+            "artifacts/guardtrellis-cursor-0.1.0-preview.4-advisory.zip",
         )
         self.assertNotIn("artifacts/guardtrellis-cursor-0.1.0-preview.1-advisory.zip", files)
         native = delivery.native.verify(self.native, delivery.NATIVE_SHA256)

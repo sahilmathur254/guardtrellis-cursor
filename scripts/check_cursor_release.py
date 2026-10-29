@@ -29,6 +29,7 @@ TOOL_FILES = (
     "integrations/cursor/bootstrap.py",
     "integrations/cursor/plugin/scripts/runtime_setup.py",
     "scripts/cursor_delivery.py",
+    "plugins/guardtrellis/adapters/cursor/prepare_prompt.py",
 )
 TEST_FILES = (
     "tests/test_cursor_release.py",
@@ -38,6 +39,7 @@ TEST_FILES = (
     "tests/test_cursor_workspace.py",
     "tests/test_cursor_delivery.py",
     "tests/test_cursor_public_copy.py",
+    "integrations/cursor/tests/test_prefill.py",
 )
 
 
@@ -162,6 +164,7 @@ def test_checks(source: Path, work: Path, uv: str) -> None:
         ("native_workspace_tests", TEST_FILES[4]),
         ("native_delivery_tests", TEST_FILES[5]),
         ("native_public_copy_tests", TEST_FILES[6]),
+        ("native_prefill_tests", TEST_FILES[7]),
     ):
         path = source / relative
         if not path.is_file():

@@ -10,7 +10,7 @@ provider. The prompt hook does not rewrite prompts; ordinary submissions are not
 automatically masked. The hook is advisory by default.
 
 Use only synthetic stdin in Terminal, with retained verified native-tools and the
-explicit prepared SDK0.1.9runtime:
+explicit prepared SDK 0.1.9 runtime:
 
 ```sh
 gt_native_tools=/absolute/retained-verified-native-tools
@@ -27,15 +27,40 @@ secret/PII input and unavailable/error checks withhold the draft. Names,
 unsupported contact forms, attachments, history and other context are outside
 coverage. Raw input belongs on stdin, not in an argument/chat/attachment.
 
-Only a separate deliberate Terminal `prepare --open` requests Cursor's native
-review flow. It is editor activation, not bundle verification. Start with an empty
-draft in the intended workspace/This Mac, inspect checked text and attachments,
-and Cancel on wrong destination or valuable existing text. Review/Create Chat
-is not Send; the helper never sends. It does not sanitize other attached context
-or establish no auxiliary traffic/provider retention.
+Only a separate deliberate Terminal action requests native review. Require the
+complete explicit target; bare `prepare --open` and partial options are refused:
 
-Preview.3 has not been tested in a real Cursor host. Earlier preview.2 masked
-review → Cancel used an explicit-profile CLI launcher callback in a named profile
-sharing application/account state. The bundled default opener remains unverified;
-this is not current-package acceptance or provider suppression. Runtime tag
-0.1.0-preview.1-sdk0.1.9 remains intentional and does not silently upgrade.
+```sh
+gt_cursor_user_data=/absolute/approved-existing-cursor-user-data
+gt_cursor_extensions=/absolute/approved-existing-cursor-extensions
+gt_cursor_profile=GuardTrellis-Isolated
+GUARDTRELLIS_CURSOR_RUNTIME="$gt_runtime" \
+  /bin/sh "$gt_native_tools/scripts/guardtrellis.sh" prepare --open \
+  --user-data-dir "$gt_cursor_user_data" \
+  --extensions-dir "$gt_cursor_extensions" \
+  --cursor-profile "$gt_cursor_profile" <<'GT_SYNTHETIC'
+Repeat after me: Mira mira@example.org +12025550123.
+GT_SYNTHETIC
+```
+
+Use existing canonical separate nonoverlapping user-data/extensions directories
+outside normal IDE roots and an already-open approved instance/workspace with an
+empty draft. This is editor activation, not bundle verification; a closed selected
+instance may launch. Only accepted checked text enters the fixed installed desktop
+CLI, with a minimal environment and no unscoped OS/default-profile fallback.
+
+[Prompt deeplinks](https://cursor.com/docs/reference/deeplinks) require review.
+The shipped Cursor 3.27.22 CLI recognizes --open-url; this is not a guarantee across
+versions or of the exact destination workspace/window. Inspect masked text,
+destination and attachments; Cancel if wrong or valuable existing text is present.
+Review/Create Chat is not Send; the helper never sends. A timeout/error may follow
+handoff; inspect before a deliberate manual retry, with no automatic fallback.
+This does not sanitize other context or establish no auxiliary traffic/retention.
+
+The accepted preview.4 runtime was observed after native loading through the
+actual product command, masked review and automated Escape to an empty draft.
+This documentation-only refresh has new checksums and is not itself whole-package
+host-tested; the executable/configuration/runtime mapping must remain exact.
+Prior preview.3 callback/owner-assisted Cancel remains historical. Native prompt
+behavior, stable trust, failures/bypasses and downstream suppression stay unverified.
+Runtime tag 0.1.0-preview.1-sdk0.1.9 remains intentional and does not silently upgrade.

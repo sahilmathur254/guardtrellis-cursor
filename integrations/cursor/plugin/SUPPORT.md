@@ -2,7 +2,7 @@
 
 Publisher: **Sahil Mathur**. Private support/security/privacy contact: [sahil.mathur2504@gmail.com](mailto:sahil.mathur2504@gmail.com), also published on the [support page](https://guardtrellis-plugin.sahil254.chatgpt.site/support/). The public contact page was anonymously reachable on 29 October 2026; no delivery/response test or future availability promise is made. Support is voluntary, with no promised response time, SLA or enterprise-management offering.
 
-The website's SDK 0.1.1 integration information and SDK 0.1.6 tester download are separate older offerings. This file covers native/helper **0.1.0-preview.3 / SDK 0.1.9**, not a new public download or marketplace listing. Preview.3 has not been tested in a real Cursor host. Earlier exact preview.2 loading/restart/removal, local SDK readiness/runtime binding and separate component UI plus explicit-profile masked review → Cancel were observed on Cursor 3.27.22/macOS arm64. These bounded observations do not certify preview.3. Stable trust, native prompt-hook SDK consumption/decisions, failure/bypass, default opener, downstream behavior and ordinary marketplace installation remain unverified.
+The website's SDK 0.1.1 integration information and SDK 0.1.6 tester download are separate older offerings. This file covers native/helper **0.1.0-preview.4 / SDK 0.1.9**, not a new public download or marketplace listing. The accepted runtime was observed on Cursor 3.27.22/macOS 27.0.1 arm64/Python 3.12.0: native loading first, actual shell/full-target masked review, automated Escape/empty input, cold reopen 1/0/0 and fresh post-removal 0/0/0, with no Create Chat/Send/provider workflow. This documentation-only refresh changes package checksums; new ZIPs are not themselves whole-package host-tested, and runtime evidence depends on exact unchanged executable/configuration mapping. Prior preview.3 callback/owner-assisted Cancel and preview.2 evidence remain historical. Stable trust, native prompt-hook SDK consumption/decisions, failure/bypass, downstream behavior and ordinary marketplace installation remain unverified.
 
 ## First local checks
 
@@ -15,6 +15,10 @@ Use [README.md](README.md) in Terminal, outside agent chat. Confirm the exact tr
 - Modified/concurrent/partial state needs local inspection with matching tools. No force cleanup, broad deletion, profile removal or automatic runtime migration is provided.
 
 This delivery is advisory by default: a finding or unavailable check requests continuation. The prompt hook does not rewrite prompts. Ordinary chat cannot test automatic PII masking; use explicit Terminal `prepare`, inspect `[PII]` output and treat any later `--open`/review/Cancel as a separate editor action. A scanner finding, requested cancellation and observed downstream block are separate results. Use synthetic examples only; a free/trial account is not proof of zero submission charges.
+
+On macOS, choose a short canonical user-data path: IPC socket path limits can reject an otherwise valid directory before workspace loading. Directory validation alone does not guarantee that the host socket path fits.
+
+For editor review, all of `--open --user-data-dir ABS --extensions-dir ABS --cursor-profile NAME` are required. Use the existing canonical approved isolated directories and review the intended empty workspace first. Bare/partial open options, normal-profile roots and unsafe paths are refused. The fixed installed desktop CLI gets only accepted checked text and a minimal environment; no OS-opener/default-profile fallback. Named-build `--open-url` compatibility is not a guarantee across versions or of the exact window/workspace. Cancel on a wrong destination. Error/timeout can occur after handoff: inspect before a manual retry; do not automatically retry or send to prove success.
 
 ## Metadata-only support template
 
