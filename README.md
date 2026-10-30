@@ -80,4 +80,4 @@ Maintained by **Sahil Mathur** as an individual publisher. Public support/securi
 
 Share reviewed version/status metadata and fictional reproductions only. Do not send raw prompts, source, matched values, credentials or host logs. Local preparation does not change Cursor/provider retention or network behavior. Older website/tester downloads retain their own version scope.
 
-[Support and removal](plugins/guardtrellis-cursor/SUPPORT.md) · [Privacy](plugins/guardtrellis-cursor/PRIVACY.md) · [Maintenance and contribution workflow](MAINTAINING.md) · [License](LICENSE) · [Notices](NOTICE)
+[Service terms](TERMS.md) · [Support and removal](plugins/guardtrellis-cursor/SUPPORT.md) · [Privacy](plugins/guardtrellis-cursor/PRIVACY.md) · [Security reporting](SECURITY.md) · [Maintenance and contribution workflow](MAINTAINING.md) · [License](LICENSE) · [Notices](NOTICE)

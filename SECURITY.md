@@ -1,0 +1,13 @@
+# Security reporting — GuardTrellis for Cursor
+
+Prepared 30 October 2026. Operating owner: **Sahil Mathur**. Send vulnerability, privacy or exposure reports privately to [sahil.mathur2504@gmail.com](mailto:sahil.mathur2504@gmail.com), with subject `GuardTrellis Cursor security report`.
+
+Start with the affected native/helper version and trusted checksum, the suspected impact, reviewed status/reason codes and a fictional reproduction. Do not send working credentials, raw prompts/source, matched personal data, host debug logs, account/session identifiers or private paths. Do not post sensitive details in public issues. No GitHub private-advisory intake, bug bounty, around-the-clock team or fixed response-time SLA is implied.
+
+The publisher is responsible for triage, safe containment, scoped correction, verification and appropriate coordination under the [packaged incident procedure](plugins/guardtrellis-cursor/SUPPORT.md#publisher-incident-procedure). Reports are handled according to [native privacy](plugins/guardtrellis-cursor/PRIVACY.md#support-data-handling). If a real credential may have been exposed, its owner should follow the issuer's approved revocation/rotation procedure; do not send that credential to us or demonstrate exposure with real data.
+
+The publisher's accepted [Cursor Marketplace Publisher Terms section 4.3](https://cursor.com/marketplace-publisher-terms) require prompt notice to **legal@cursor.com** of plugin/Plugin Data vulnerabilities, breaches or other security incidents. Cursor's [marketplace security guidance](https://cursor.com/help/security-and-privacy/marketplace-security) separately provides **security-reports@cursor.com** for marketplace plugin security concerns. The technical route does not replace required contractual notice. Notices use minimum necessary facts and deliberate owner action; no tool automatically sends reports or publishes advisories.
+
+The supported initial claim is an experimental macOS reviewed-prefill workflow, with exact evidence and remaining limits in [PUBLIC-EVIDENCE.md](PUBLIC-EVIDENCE.md). It is not complete secret/PII detection, a verified native enforcement boundary, automatic ordinary-chat redaction or a network-egress guarantee. The publisher will assess reports rather than dismissing them merely because the software is experimental.
+
+An affected flow may need to be stopped or removed with the matching owned tools. Delisting or a source correction does not guarantee remote disablement or automatic updates of existing copies. Recovery and updates follow the documented review/reindex process and required approvals. No incident, vendor notice, release, approval or listing is claimed by this policy.

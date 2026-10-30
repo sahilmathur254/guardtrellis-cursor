@@ -1,5 +1,22 @@
 # Public evidence and limitations
 
+## Local service and incident-policy refresh — 30 October 2026
+
+Service terms, publisher support/incident responsibilities and support-data handling are prepared locally for native/helper **0.1.0-preview.4 / SDK 0.1.9**. Root [TERMS.md](TERMS.md) and [SECURITY.md](SECURITY.md) link to complete policies shipped inside both native/helper SUPPORT.md files; native PRIVACY.md covers local data flow. The Apache license, notices, runtime marker, SDK locks, hook/plugin configuration and executable logic are unchanged. This documentation-only source update has local validation. No current-source GitHub CI, reindex result, download release, marketplace approval or listing is claimed. Application-time source was 1ebfd6a, followed by the README-only public update c66b16e; those earlier snapshots do not include these policies. CI 40936455108 remains bound to 1ebfd6a.
+
+| Locally verified artifact | SHA-256 |
+| --- | --- |
+| Native advisory 0.1.0-preview.4 | `1dd58f7d6d165db44708608f608691c4945a4ef719dd6ffafe6f7a500bcb691b` |
+| Complete helper 0.1.0-preview.4 | `0bdf1726eabdc36e6f3ed270d9a5c18bd13887c9e330aa4be06895c07d64a82a` |
+
+Native/helper archives each build twice with identical bytes and pass strict verification. Local checks cover all four phases: **146 tests / zero skips**, locked Ruff/format/strict mypy/shell checks, artifacts and unopened SDK/helper lifecycle. Environment: macOS 27.0.1 arm64, Python 3.12.1, uv 0.8.17. Earlier bootstrap attempts failed; static/lifecycle were then verified separately with a copied retained SDK 0.1.9 cache. The failed attempts are retained; this is aggregate phase validation, not a claim that the initial all-phase command passed. UV offline mode was enforced and Python downloads were disabled; no dependency download, IDE activation or provider call occurred.
+
+Relative to the previously published-source candidate at c66b16e, native changes are README, PRIVACY, SUPPORT and the derived SOURCE-MANIFEST; all other 19 members are exact. Relative to accepted native `a655171e…ad45f`, all **17 implementation/configuration members** remain exact; the six documentation/manifest differences are the same categories recorded below. The helper builder changes only its declarative embedded-native checksum; installer/bootstrap/ownership logic is unchanged. The new whole ZIPs have **not** been run in Cursor, and no submitted-prompt, trust, failure/bypass, downstream, marketplace-lifecycle or additional-platform claim is added. Codex discovery remains pending and MCP remains deferred.
+
+The dated reports below retain their original wording, versions and checksums as historical snapshots. Their earlier “current candidate” headings and validation outcomes do not relabel this new local policy revision or authorize publication. Use the hashes above for the current local source build.
+
+## Historical dated evidence — preserved
+
 Source-preview evidence — 29 October 2026. This sanitized summary does not reproduce private trial records or certify a marketplace listing.
 
 ## Current candidate

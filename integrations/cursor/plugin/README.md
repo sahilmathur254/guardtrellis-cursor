@@ -136,3 +136,7 @@ After confirming the runtime is unused elsewhere, use the **retained verified na
 Keep matching artifacts/tools until recovery is verified. Updates/rollback use reviewed remove/reinstall and a new verified candidate identity; do not silently replace live source, default runtimes or older versioned downloads. Refused ownership/inventory/concurrent-state checks require local inspection; never use broad deletion or edit a ledger to force success. Neither helper starts Cursor, submits a prompt, changes trust, uploads support data or publishes a plugin automatically.
 
 Support: [private reporting and metadata-only template](SUPPORT.md). Official routes: [workspace lifecycle hook](https://cursor.com/docs/hooks#workspaceopen), [project plugin loading](https://cursor.com/docs/plugins#using-the-workspaceopen-hook). Marketplace source, owner disclosure, exact-package host acceptance and curated review/publication are separate gates.
+
+## Service terms, support and security
+
+Read the packaged [service terms](SUPPORT.md#service-terms), [support data handling](SUPPORT.md#support-data-handling) and [publisher incident procedure](SUPPORT.md#publisher-incident-procedure). They cover this native/helper preview and publisher support; older website offerings have separate policies. Publisher responsibilities remain applicable despite the experimental scope and absence of a response-time SLA. No outreach, incident or marketplace approval is implied by these documents.

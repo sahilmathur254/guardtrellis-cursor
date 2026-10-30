@@ -40,3 +40,11 @@ Import reviewed licensed file bytes with exact hashes/modes, not private Git anc
 Any public branch push discloses source even if CI is manual-only. Obtain exact file/ref/disclosure and commit/push approval first. Live CI usage, host activation/prompt scope, download deployment, publisher terms/review and Publish are separate gates. Keep experimental [evidence limits](PUBLIC-EVIDENCE.md); no automatic-other-agent interception or enterprise-readiness claim.
 
 Before remote writes, recovery means retaining/discarding only owned local staging and preserving donor/destination/old artifacts. Later approved public corrections use reviewed forward fixes/reverts, not history erasure. Installed rollback follows the matching owned close/remove/reinstall guide; no broad cleanup, shared-runtime deletion or normal-profile changes.
+
+## Native service and incident documentation
+
+Root [TERMS.md](TERMS.md) and [SECURITY.md](SECURITY.md) are repository entrypoints. Complete service terms, support-data handling and the owner incident procedure ship in both maintained native/helper SUPPORT.md files; native PRIVACY.md describes full local data flow. Keep these policies synchronized without importing older website/skill terms. They do not alter Apache/third-party rights, promise a response-time SLA or waive accepted Marketplace duties.
+
+The owner manually triages reports and promptly provides required incident notice to legal@cursor.com; security-reports@cursor.com is Cursor's separate technical reporting route. Follow the packaged procedure, minimize shared data, preserve unrelated/owned state and verify only the recovery actually observed. Actual communications, source/reindex/release changes and host/provider actions still need their concrete authorization; documentation does not send or activate anything.
+
+A documentation-only policy refresh changes SOURCE-MANIFEST/native/helper hashes and the declarative embedded-native checksum. Keep old artifacts and CI/host evidence immutable; prove executable/hook/runtime/SDK-lock equality and verify reproducible new archives. New hashes are not a new whole-package native trial or current-source GitHub CI.

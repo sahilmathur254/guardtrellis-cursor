@@ -14,7 +14,7 @@ The outer file is `guardtrellis-cursor-helper-0.1.0-preview.4.zip`. Its allowlis
 - `scripts/cursor_delivery.py`, `scripts/cursor_workspace.py`, `scripts/cursor_release.py` and `integrations/cursor/bootstrap.py`.
 - `artifacts/guardtrellis-cursor-0.1.0-preview.4-advisory.zip`, the 23-member native source archive (member count retained; prefill-route/documentation/version bytes refreshed).
 
-The inner archive's SHA-256 is `092f10ac145838ffc25f11396b129b808bc5ed1f782cd9cb89da3c04758ae064`. Its native-specific README, compatibility, privacy and support documents describe preview.4's scope. Prior preview.2 bounded lifecycle/component/review observations remain dated evidence; they do not certify this new package. The bundle contains no Python, virtual environment, credentials, hosted service or automatic updater.
+The inner archive's SHA-256 is `1dd58f7d6d165db44708608f608691c4945a4ef719dd6ffafe6f7a500bcb691b`. Its native-specific README, compatibility, privacy and support documents describe preview.4's scope. Prior preview.2 bounded lifecycle/component/review observations remain dated evidence; they do not certify this new package. The bundle contains no Python, virtual environment, credentials, hosted service or automatic updater.
 
 ## 1. Authenticate and extract the outer bundle
 
@@ -54,7 +54,7 @@ GT_CURSOR_RUNTIME="/absolute/new-guardtrellis-sdk019-runtime"
 GT_NATIVE_TOOLS="/absolute/new-verified-native-tools"
 GT_UV="/absolute/trusted/uv"
 GT_NATIVE_ZIP="$GT_DELIVERY_ROOT/artifacts/guardtrellis-cursor-0.1.0-preview.4-advisory.zip"
-GT_NATIVE_SHA="092f10ac145838ffc25f11396b129b808bc5ed1f782cd9cb89da3c04758ae064"
+GT_NATIVE_SHA="1dd58f7d6d165db44708608f608691c4945a4ef719dd6ffafe6f7a500bcb691b"
 GT_WORKSPACE_HELPER="$GT_DELIVERY_ROOT/scripts/cursor_workspace.py"
 
 "$GT_CURSOR_PY" -I -B "$GT_DELIVERY_ROOT/scripts/cursor_release.py" \
@@ -159,3 +159,7 @@ The external runtime is deliberately still present. Only after confirming it is 
 Keep matching artifacts/tools until cleanup or rollback is verified. For an update, review a new authenticated bundle/source/runtime identity, remove the previous owned installation safely and install into fresh reviewed state. There is no in-place force update or automatic migration. Rollback uses the retained accepted bundle/runtime and the same reviewed remove/install cycle; do not replace a live source cache or the older tester download silently. If ownership, inventory or concurrent-change checks refuse removal, stop and inspect; do not use `rm -rf`, delete a profile or alter unrelated hooks. See [support and the manually reviewed metadata template](SUPPORT.md).
 
 Official route references: [Cursor workspace lifecycle hooks](https://cursor.com/docs/hooks#workspaceopen), [project plugin loading](https://cursor.com/docs/plugins#using-the-workspaceopen-hook). This source bundle adds no MCP service, enterprise management or listing approval.
+
+## Service terms, support and security
+
+Read the packaged [service terms](SUPPORT.md#service-terms), [support data handling](SUPPORT.md#support-data-handling) and [publisher incident procedure](SUPPORT.md#publisher-incident-procedure). They cover this native/helper preview and publisher support; older website offerings have separate policies. Publisher responsibilities remain applicable despite the experimental scope and absence of a response-time SLA. No outreach, incident or marketplace approval is implied by these documents.

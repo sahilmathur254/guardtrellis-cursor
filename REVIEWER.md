@@ -6,7 +6,7 @@ The bundled prompt hook is advisory by default: findings and unavailable checks 
 
 ## 1. Establish exact source and artifacts
 
-Review the public source/commit selected for the application, README, PUBLIC-EVIDENCE, compatibility, privacy and support. Use only the matching complete helper delivery and independently trusted full checksum. The native ZIP does not contain the workspace installer. Source publication, a downloadable release, review approval and marketplace availability are separate states.
+Review the source selected for the application, README, PUBLIC-EVIDENCE, [service terms](TERMS.md), [security reporting](SECURITY.md), compatibility, privacy and support. The 30 October policy refresh is a documentation-only source update. Application-time source was 1ebfd6a, followed by the README-only public update c66b16e; those earlier snapshots do not include these policies. The current source has local offline validation; GitHub CI remains bound to 1ebfd6a. Source availability does not establish a downloadable release, reindex result, marketplace approval or listing. The full terms and incident procedure ship inside both SUPPORT.md copies; earlier website policies cover other offerings. Use only the matching complete helper delivery and independently trusted full checksum. The native ZIP does not contain the workspace installer. Source publication, a downloadable release, review approval and marketplace availability are separate states.
 
 The native/helper copy refresh changes documentation and derived source-manifest/inner-pin metadata only; their artwork, plugin/hook manifests, implementation and SDK locks remain unchanged. The separate publisher SVG and this guide are outside those archives. See PUBLIC-EVIDENCE for exact mapping. Accepted implementation evidence is tied to exact older archive hashes there; new artifact hashes and unchanged implementation mappings must be checked separately. Do not represent the revised whole ZIP as a new native trial or the earlier CI run as current-source CI.
 
@@ -16,8 +16,8 @@ If no matching downloadable helper has been published, build it from the exact r
 GT_PY="/absolute/trusted/python3.12"
 GT_SOURCE="/absolute/reviewed-guardtrellis-cursor-source"
 GT_OUTPUT="/absolute/fresh-source-build-output"
-GT_NATIVE_SHA="092f10ac145838ffc25f11396b129b808bc5ed1f782cd9cb89da3c04758ae064"
-GT_HELPER_SHA="488a963c21a62d8e7d45797eedd5eb3d344c538ba4a066c7e126ef63010df1eb"
+GT_NATIVE_SHA="1dd58f7d6d165db44708608f608691c4945a4ef719dd6ffafe6f7a500bcb691b"
+GT_HELPER_SHA="0bdf1726eabdc36e6f3ed270d9a5c18bd13887c9e330aa4be06895c07d64a82a"
 
 "$GT_PY" -I -B "$GT_SOURCE/scripts/cursor_release.py" build \
   --source "$GT_SOURCE" --output "$GT_OUTPUT/native" --profile advisory
